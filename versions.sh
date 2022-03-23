@@ -18,8 +18,12 @@ else
 fi
 versions=( "${versions[@]%/}" )
 
-getPipCommit="$(curl -fsSL 'https://github.com/pypa/get-pip/commits/main/public/get-pip.py.atom' | tac|tac | awk -F '[[:space:]]*[<>/]+' '$2 == "id" && $3 ~ /Commit/ { print $4; exit }')"
-getPipUrl="https://github.com/pypa/get-pip/raw/$getPipCommit/public/get-pip.py"
+# getPipCommit="$(curl -fsSL 'https://github.com/pypa/get-pip/commits/main/public/get-pip.py.atom' | tac|tac | awk -F '[[:space:]]*[<>/]+' '$2 == "id" && $3 ~ /Commit/ { print $4; exit }')"
+# ^ returning blank variable on Jenkins
+getPipCommit="$(curl -fsSL 'https://api.github.com/repos/pypa/get-pip/commits?path=public/get-pip.py&per_page=1' | tac|tac | jq -r '.[0].sha')"
+#getPipUrl="https://github.com/pypa/get-pip/raw/$getPipCommit/public/get-pip.py"
+# ^ also broken? redirects to below.
+getPipUrl="https://raw.githubusercontent.com/pypa/get-pip/$getPipCommit/public/get-pip.py"
 getPipSha256="$(curl -fsSL "$getPipUrl" | sha256sum | cut -d' ' -f1)"
 export getPipUrl getPipSha256
 
@@ -121,7 +125,7 @@ for version in "${versions[@]}"; do
 	fi
 
 	ensurepipVersions="$(
-		wget -qO- "https://github.com/python/cpython/raw/v$fullVersion/Lib/ensurepip/__init__.py" \
+		wget -qO- "https://raw.githubusercontent.com/python/cpython/v$fullVersion/Lib/ensurepip/__init__.py" \
 			| grep -E '^[^[:space:]]+_VERSION[[:space:]]*='
 	)"
 	pipVersion="$(sed -nre 's/^_PIP_VERSION[[:space:]]*=[[:space:]]*"(.*?)".*/\1/p' <<<"$ensurepipVersions")"
@@ -175,6 +179,8 @@ for version in "${versions[@]}"; do
 					"3.16",
 					"3.15"
 				| "alpine" + .),
+				"focal",
+				"slim-focal",
 				if env.hasWindows != "" then
 					(
 						"ltsc2022",

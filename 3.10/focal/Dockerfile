@@ -4,7 +4,7 @@
 # PLEASE DO NOT EDIT IT DIRECTLY.
 #
 
-FROM buildpack-deps:bullseye
+FROM buildpack-deps:focal
 
 # ensure local python is preferred over distribution python
 ENV PATH /usr/local/bin:$PATH
@@ -23,8 +23,8 @@ RUN set -eux; \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
-ENV GPG_KEY E3FF2839C048B25C084DEBE9B26995E310250568
-ENV PYTHON_VERSION 3.8.13
+ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
+ENV PYTHON_VERSION 3.10.4
 
 RUN set -eux; \
 	\
@@ -47,6 +47,7 @@ RUN set -eux; \
 		--enable-optimizations \
 		--enable-option-checking=fatal \
 		--enable-shared \
+		--with-lto \
 		--with-system-expat \
 		--without-ensurepip \
 	; \
@@ -68,7 +69,6 @@ RUN set -eux; \
 		\( \
 			\( -type d -a \( -name test -o -name tests -o -name idle_test \) \) \
 			-o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name 'libpython*.a' \) \) \
-			-o \( -type f -a -name 'wininst-*.exe' \) \
 		\) -exec rm -rf '{}' + \
 	; \
 	\
@@ -88,7 +88,7 @@ RUN set -eux; \
 # if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
 ENV PYTHON_PIP_VERSION 22.0.4
 # https://github.com/docker-library/python/issues/365
-ENV PYTHON_SETUPTOOLS_VERSION 57.5.0
+ENV PYTHON_SETUPTOOLS_VERSION 58.1.0
 # https://github.com/pypa/get-pip
 ENV PYTHON_GET_PIP_URL https://raw.githubusercontent.com/pypa/get-pip/6ce3639da143c5d79b44f94b04080abf2531fd6e/public/get-pip.py
 ENV PYTHON_GET_PIP_SHA256 ba3ab8267d91fd41c58dbce08f76db99f747f716d85ce1865813842bb035524d

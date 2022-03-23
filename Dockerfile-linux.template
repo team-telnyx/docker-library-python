@@ -5,11 +5,17 @@
 	def is_slim:
 		env.variant | startswith("slim-")
 	;
+	# should check focal or xenial or jammy...
+	def is_ubuntu:
+		env.variant | endswith("focal")
+	;
 	def rcVersion:
 		env.version | rtrimstr("-rc")
 -}}
 {{ if is_alpine then ( -}}
 FROM alpine:{{ env.variant | ltrimstr("alpine") }}
+{{ ) elif (is_slim and is_ubuntu) then ( -}}
+FROM ubuntu:{{ env.variant | ltrimstr("slim-") }}
 {{ ) elif is_slim then ( -}}
 FROM debian:{{ env.variant | ltrimstr("slim-") }}-slim
 {{ ) else ( -}}
