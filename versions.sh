@@ -175,6 +175,7 @@ for version in "${versions[@]}"; do
 					"3.15",
 					"3.14"
 				| "alpine" + .),
+				"focal",
 				if env.hasWindows != "" then
 					(
 						"ltsc2022",
