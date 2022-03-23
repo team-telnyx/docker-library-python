@@ -69,7 +69,7 @@ versions.json: versions.sh
 
 .PHONY: version-%
 version-%: versions.sh
-	./versions.sh $(*F)
+	bash -o xtrace versions.sh $(*F)
 
 %/focal/Dockerfile: Dockerfile-linux.template
 	./apply-templates.sh $(*F)
