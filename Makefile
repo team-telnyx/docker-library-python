@@ -62,6 +62,12 @@ test-%:
 		--exit-code 1 \
 		$(image):$(*F)
 
+tools.Dockerimage: tools.Dockerfile
+	docker build \
+		--tag dockerpythonbuildtool \
+		--file $< \
+		--iidfile $@ \
+		.
 
 # actual files in the repo
 versions.json: versions.sh
@@ -71,8 +77,9 @@ versions.json: versions.sh
 version-%: versions.sh
 	bash -o xtrace versions.sh $(*F)
 
-%/focal/Dockerfile: Dockerfile-linux.template
-	./apply-templates.sh $(*F)
+%/focal/Dockerfile: Dockerfile-linux.template tools.Dockerimage
+	docker run --rm --tty --user $(shell id -u):$(shell id -g) --volume $(shell pwd):/mnt dockerpythonbuildtool \
+		bash apply-templates.sh $(*F)
 
 %/focal/Dockerimage: %/focal/Dockerfile buildpack-deps-focal.Dockerimage
 	docker build \

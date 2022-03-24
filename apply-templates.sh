@@ -58,9 +58,7 @@ for version; do
 
 		{
 			generated_warning
-			# gawk -f "$jqt" "$template"
-			# Jenkins workaround
-			awk -f "$jqt" "$template"
+			gawk -f "$jqt" "$template"
 		} > "$version/$dir/Dockerfile"
 	done
 done
