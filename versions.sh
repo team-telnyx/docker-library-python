@@ -18,7 +18,9 @@ else
 fi
 versions=( "${versions[@]%/}" )
 
-getPipCommit="$(curl -fsSL 'https://github.com/pypa/get-pip/commits/main/public/get-pip.py.atom' | tac|tac | awk -F '[[:space:]]*[<>/]+' '$2 == "id" && $3 ~ /Commit/ { print $4; exit }')"
+# getPipCommit="$(curl -fsSL 'https://github.com/pypa/get-pip/commits/main/public/get-pip.py.atom' | tac|tac | awk -F '[[:space:]]*[<>/]+' '$2 == "id" && $3 ~ /Commit/ { print $4; exit }')"
+# ^ returning blank variable on Jenkins
+getPipCommit="$(curl -fsSL 'https://api.github.com/repos/pypa/get-pip/commits?path=public/get-pip.py&per_page=1' | tac|tac | jq -r '.[0].sha')"
 getPipUrl="https://github.com/pypa/get-pip/raw/$getPipCommit/public/get-pip.py"
 getPipSha256="$(curl -fsSL "$getPipUrl" | sha256sum | cut -d' ' -f1)"
 export getPipUrl getPipSha256
