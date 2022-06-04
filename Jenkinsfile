@@ -9,29 +9,29 @@ dockerImage {
     channel = "python-jenkins"
 
     build_stage_targets = [
-        // "build-3.11-rc",
-        "build-3.10",
-        // "build-3.9",
-        // "build-3.8",
-        "build-3.7",
-        // "build-slim-3.11-rc",
-        // "build-slim-3.10",
-        // "build-slim-3.9",
-        // "build-slim-3.8",
-        // "build-slim-3.7",
+        // "3.11-rc/jammy/Docker*",
+        "3.10/jammy/Docker*",
+        // "3.9/jammy/Docker*",
+        // "3.8/jammy/Docker*",
+        "3.7/jammy/Docker*",
+        // "3.11-rc/slim-jammy/Docker*",
+        // "3.10/slim-jammy/Docker*",
+        // "3.9/slim-jammy/Docker*",
+        // "3.8/slim-jammy/Docker*",
+        // "3.7/slim-jammy/Docker*",
     ]
 
     test_stage_targets = [
-        // "test-3.11-rc",
-        "test-3.10",
-        // "test-3.9",
-        // "test-3.8",
-        "test-3.7",
-        // "test-slim-3.11-rc",
-        // "test-slim-3.10",
-        // "test-slim-3.9",
-        // "test-slim-3.8",
-        // "test-slim-3.7",
+        // "test-3.11-rc/jammy/Dockerimage",
+        "test-3.10/jammy/Dockerimage",
+        // "test-3.9/jammy/Dockerimage",
+        // "test-3.8/jammy/Dockerimage",
+        "test-3.7/jammy/Dockerimage",
+        // "test-3.11-rc/slim-jammy/Dockerimage",
+        // "test-3.10/slim-jammy/Dockerimage",
+        // "test-3.9/slim-jammy/Dockerimage",
+        // "test-3.8/slim-jammy/Dockerimage",
+        // "test-3.7/slim-jammy/Dockerimage",
     ]
 
     image_additional_images = [

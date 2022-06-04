@@ -1,4 +1,5 @@
 import itertools
+import os
 import pathlib
 
 import requests
@@ -123,5 +124,34 @@ class DockerimageTargets(Targets):
             yield {
                 "basename": self.basename,
                 "file_dep": [self.associated_dockerfile_target.basename],
+                "actions": actions,
+            }
+
+
+class DockerimageTests(DockerimageTargets):
+
+    @property
+    def basename(self):
+        return "test-{}/Dockerimage".format(self.subdir)
+
+    @property
+    def associated_dockerimage_target(self):
+        return DockerimageTargets(self.os_variant, self.python_version)
+
+    @classmethod
+    def create_doit_tasks(cls):
+        for osv, pyv in itertools.product(cls.os_variants, cls.python_versions):
+            self = cls(osv, pyv)
+
+            trivy_arguments = ["client", "--remote", "http://trivy.query.consul"] if "BUILD_URL" in os.environ else ["image"]
+
+            actions = [
+                ["docker", "run", "--rm", self.tag, "python", "--version"],
+                ["trivy", *trivy_arguments, "--severity", "HIGH", "--exit-code", "0", self.tag],
+                ["trivy", *trivy_arguments, "--severity", "CRITICAL", "--exit-code", "1", self.tag],
+            ]
+            yield {
+                "basename": self.basename,
+                "file_dep": [self.associated_dockerimage_target.basename],
                 "actions": actions,
             }

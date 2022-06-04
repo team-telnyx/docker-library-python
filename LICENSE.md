@@ -5,7 +5,7 @@ Copyright (c) 2022 Nick Timkovich, Telnyx LLC.
 
 # */*/Dockerfile
 
-> The Dockerfiles are derivations of Docker Hub Python files, so also use that license.
+> The Dockerfiles are derivations of the [Docker Hub Python files](https://github.com/docker-library/python), so also use that license.
 
 Copyright (c) 2014 Docker, Inc.
 
