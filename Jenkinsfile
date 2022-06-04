@@ -9,16 +9,16 @@ dockerImage {
     channel = "python-jenkins"
 
     build_stage_targets = [
-        // "3.11-rc/jammy/Docker*",
-        "3.10/jammy/Docker*",
-        // "3.9/jammy/Docker*",
-        // "3.8/jammy/Docker*",
-        "3.7/jammy/Docker*",
-        // "3.11-rc/slim-jammy/Docker*",
-        // "3.10/slim-jammy/Docker*",
-        // "3.9/slim-jammy/Docker*",
-        // "3.8/slim-jammy/Docker*",
-        // "3.7/slim-jammy/Docker*",
+        // "3.11-rc/jammy/Dockerimage",
+        "3.10/jammy/Dockerimage",
+        // "3.9/jammy/Dockerimage",
+        // "3.8/jammy/Dockerimage",
+        "3.7/jammy/Dockerimage",
+        // "3.11-rc/slim-jammy/Dockerimage",
+        // "3.10/slim-jammy/Dockerimage",
+        // "3.9/slim-jammy/Dockerimage",
+        // "3.8/slim-jammy/Dockerimage",
+        // "3.7/slim-jammy/Dockerimage",
     ]
 
     test_stage_targets = [
