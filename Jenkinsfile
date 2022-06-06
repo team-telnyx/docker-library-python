@@ -22,16 +22,16 @@ dockerImage {
     ]
 
     test_stage_targets = [
-        // "3.11-rc/jammy.test",
-        "3.10/jammy.test",
-        // "3.9/jammy.test",
-        // "3.8/jammy.test",
-        "3.7/jammy.test",
-        // "3.11-rc/slim-jammy.test",
-        // "3.10/slim-jammy.test",
-        // "3.9/slim-jammy.test",
-        // "3.8/slim-jammy.test",
-        // "3.7/slim-jammy.test",
+        // "test-3.11-rc/jammy",
+        "test-3.10/jammy",
+        // "test-3.9/jammy",
+        // "test-3.8/jammy",
+        "test-3.7/jammy",
+        // "test-3.11-rc/slim-jammy",
+        // "test-3.10/slim-jammy",
+        // "test-3.9/slim-jammy",
+        // "test-3.8/slim-jammy",
+        // "test-3.7/slim-jammy",
     ]
 
     image_additional_images = [
