@@ -1,0 +1,51 @@
+{
+    "global": {
+        "base_image": "registry.internal.telnyx.com/jenkins/python",
+        "service_username": "service",
+        "service_user_id": "5000",
+        "ver_s6": "3.1.0.1",
+        "ver_pyspy": "0.3.3",
+        "go_builder": "1.12-buster",
+        "libc": "gnu"
+    },
+    "3.7": {
+        "ver_py": "3.7",
+        "base_tag": "3.7"
+    },
+    "3.7-slim": {
+        "ver_py": "3.7",
+        "base_tag": "3.7-slim"
+    },
+    "3.8": {
+        "ver_py": "3.8",
+        "base_tag": "3.8"
+    },
+    "3.8-slim": {
+        "ver_py": "3.8",
+        "base_tag": "3.8-slim"
+    },
+    "3.9": {
+        "ver_py": "3.9",
+        "base_tag": "3.9"
+    },
+    "3.9-slim": {
+        "ver_py": "3.9",
+        "base_tag": "3.9-slim"
+    },
+    "3.10": {
+        "ver_py": "3.10",
+        "base_tag": "3.10"
+    },
+    "3.10-slim": {
+        "ver_py": "3.10",
+        "base_tag": "3.10"
+    },
+    "3.11-rc": {
+        "ver_py": "3.11-rc",
+        "base_tag": "3.11-rc"
+    },
+    "3.11-rc-slim": {
+        "ver_py": "3.11-rc-slim",
+        "base_tag": "3.11-rc-slim"
+    }
+}

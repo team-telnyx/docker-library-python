@@ -19,8 +19,8 @@ MAKEFLAGS += --always-make
 # %: venv
 # 	${venv_dir}/bin/python3 -m doit $@
 
-.PHONY: list
-	bash scripts/make-delegator.sh list
+# .PHONY: list
+# 	bash scripts/make-delegator.sh list
 
 .PHONY: %
 %:
